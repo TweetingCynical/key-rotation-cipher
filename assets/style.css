@@ -35,6 +35,10 @@ body {
   background-color: #f9fbfd;
 }
 
+p {
+  font-size: 14px;
+}
+
 .wrapper {
   padding-top: 30px;
   padding-left: 20px;
@@ -47,6 +51,24 @@ header, footer {
   padding-top: 0px;
   color: white;
   background-color: var(--mainColor);
+}
+
+.userOptions {
+  display: flex;
+  justify-items: center;
+}
+
+.userDropdowns {
+  justify-content: center;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+}
+
+#userInput, #userKey {
+  width: 100%;
+  border: 2px solid var(--secondaryColor);
+  border-radius: 2px;
 }
 
 .card {
