@@ -43,10 +43,14 @@ const charList = {
 }
 
 const charListOpt = ['a','b','c','d','e']
-let charListChoice = 'a';
-let userInput = 'yefajbjfabbsabsrbJBHB';
-let userKey = 'test';
-let iterationIndex = 0;
+let charListChoiceS = document.querySelector('#charListChoice');
+let userInputS = document.querySelector('#userInput');
+let userKeyS = document.querySelector('#userKey');
+let iterationIndexS = document.querySelector('#iterationIndex');
+let charListChoice = charListChoiceS.value;
+let userInput = userInputS.value;
+let userKey = userKeyS.value;
+let iterationIndex = iterationIndexS.value;
 const indexOfInput = [];
 const indexOfKey = [];
 let indexCoded = [];
@@ -57,36 +61,38 @@ let inputOk = true;
 let tempInput;
 
 function getCharListChoice() {
-  while (!charListOpt.includes(charListChoice)) {
-    charListChoice = prompt(`Our encryption uses a randomised character set. First, choose which one you would to use. Enter either a, b, c, d or e.`).toLowerCase();
-    if (!charListOpt.includes(charListChoice)) {
-      alert(`Invalid choice. Please enter one of the following: ${charListOpt.join(', ')}`);
-    }
-  }
+  charListChoice = charListChoiceS.value;
   return charListChoice;
 }
 
-function getInput(inputType) {
-  // Keep asking for a password length until user chooses a number between 10 and 64 inclusive
+function getInputs(inputType) {
   do {
-    inputType = prompt(`Enter the message you would like to pass through the cipher. All keyboard characters are accepted except a backslash \\ and double quotation marks \" .`,tempInput);
-    tempInput = inputType;
-    if (inputType.length < 10 || inputType.length > 1000) {
-      alert('Your message must be at least 10 characters, and less than 1000 characters long.');
-    }
-    for(i = 0; i < inputType.length; i++) {
-      if (!charList[charListChoice].includes(inputType[i])) {
-        alert(`This character ${inputType[i]} is not allowed. Please remove it from your message.`);
-        inputOk = false;
-      }
-      else inputOk = true;
-    }
+
   } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
   return inputType;
 }
 
-function getIterationIndex() {
+// function getInput(inputType) {
+//   // Keep asking for a password length until user chooses a number between 10 and 64 inclusive
+//   do {
+//     inputType = prompt(`Enter the message you would like to pass through the cipher. All keyboard characters are accepted except a backslash \\ and double quotation marks \" .`,tempInput);
+//     tempInput = inputType;
+//     if (inputType.length < 10 || inputType.length > 1000) {
+//       alert('Your message must be at least 10 characters, and less than 1000 characters long.');
+//     }
+//     for(i = 0; i < inputType.length; i++) {
+//       if (!charList[charListChoice].includes(inputType[i])) {
+//         alert(`This character ${inputType[i]} is not allowed. Please remove it from your message.`);
+//         inputOk = false;
+//       }
+//       else inputOk = true;
+//     }
+//   } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
+//   return inputType;
+// }
 
+function getIterationIndex() {
+  iterationIndex = iterationIndexS.value;
   return iterationIndex;
 }
 
@@ -123,3 +129,4 @@ function convertArray(codedArray) {
 function run() {
 
 }
+

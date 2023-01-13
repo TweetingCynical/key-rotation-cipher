@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-gb">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Key Rotation Cipher</title>
-    <link rel="stylesheet" href="assets/style.css" />
-  </head>
-  
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Key Rotation Cipher</h1>
-      </header>
-      
-      <div class="card">
-        <!-- <legend>Our encryption uses a randomised character set. First, choose which one you would to use.</legend> -->
-        <h2>Cipher Options</h2>
-        <section class="userOptions">
-          <div class="userDropdowns">
-            <p>Which randomised character set you would like to use?</p>
-          <select name="charListChoice" id="charListChoice">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Key Rotation Cipher</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>Key Rotation Cipher</h1>
+    </header>
+
+    <div class="card">
+      <!-- <legend>Our encryption uses a randomised character set. First, choose which one you would to use.</legend> -->
+      <h2>Cipher Options</h2>
+      <section class="userOptions">
+        <div class="userDropdowns">
+          <p>Which randomised character set you would like to use?</p>
+          <select name="charListChoice" id="charListChoice" onchange="getCharListChoice()">
             <option value="a">Set A</option>
             <option value="b">Set B</option>
             <option value="c">Set C</option>
@@ -30,62 +31,52 @@
         </div>
         <div class="userDropdowns">
           <p>How many iterations you would like to run?</p>
-        <select name="charListChoice" id="iterationIndex">
-          <option value="0">0 (default)</option>
-          <option value="1">1 iteration</option>
-          <option value="2">2 iterations</option>
-          <option value="3">3 iterations</option>
-          <option value="4">4 iterations</option>
-          <option value="5">5 iterations</option>
-          <option value="6">6 iterations</option>
-          <option value="7">7 iterations</option>
-          <option value="8">8 iterations</option>
-          <option value="9">9 iterations</option>
-        </select>
-      </div>
-      <div class="userDropdowns">
-        <p>Do you want to encrypt or decrypt your message:</p>
-      <select name="charListChoice" id="encrypt">
-        <option value="true">Encrypt</option>
-        <option value="false">Decrypt</option>
-      </select>
-    </div>
-        </section>
-        <div class="card-body">
-          <div>
-            <h4>Message Content</h4>
-            <p>Type your message here. Almost all keyboard characters are accepted:</p>
-          <textarea
-          id="userInput"
-          placeholder="Type your message here..."
-          aria-label="Input for Cipher"
-        ></textarea>
-      </div>
-      <div>
-        <h4>Private Key</h4>
-            <p>Choose your own encryption key. This will be used to decrypt the message. Almost all keyboard characters are accepted:</p>
-        <textarea
-        id="userKey"
-        placeholder="Type your complex key here..."
-        aria-label="Key for Cipher"
-      ></textarea>
-    </div>
-          <textarea
-            readonly
-            id="cipher-output"
-            placeholder="Your output will appear here..."
-            aria-label="Generated Cipher"
-          ></textarea>
+          <select name="charListChoice" id="iterationIndex">
+            <option value="0">0 (default)</option>
+            <option value="1">1 iteration</option>
+            <option value="2">2 iterations</option>
+            <option value="3">3 iterations</option>
+            <option value="4">4 iterations</option>
+            <option value="5">5 iterations</option>
+            <option value="6">6 iterations</option>
+            <option value="7">7 iterations</option>
+            <option value="8">8 iterations</option>
+            <option value="9">9 iterations</option>
+          </select>
         </div>
-        <div class="card-footer">
-          <button id="dicpher" class="btn">Complete Cipher</button>
+        <div class="userDropdowns">
+          <p>Do you want to encrypt or decrypt your message:</p>
+          <select name="charListChoice" id="encrypt">
+            <option value="true">Encrypt</option>
+            <option value="false">Decrypt</option>
+          </select>
         </div>
+      </section>
+      <div class="card-body">
+        <div>
+          <h4>Message Content</h4>
+          <p>Type your message here. Almost all keyboard characters are accepted:</p>
+          <textarea id="userInput" placeholder="Type your message here..." aria-label="Input for Cipher"></textarea>
+        </div>
+        <div>
+          <h4>Private Key</h4>
+          <p>Choose your own encryption key. This will be used to decrypt the message. Almost all keyboard characters
+            are accepted:</p>
+          <textarea id="userKey" placeholder="Type your complex key here..." aria-label="Key for Cipher"></textarea>
+        </div>
+        <textarea readonly id="cipher-output" placeholder="Your output will appear here..."
+          aria-label="Generated Cipher"></textarea>
+      </div>
+      <div class="card-footer">
+        <button id="dicpher" class="btn">Complete Cipher</button>
       </div>
     </div>
-    <footer>
-      <br>
-      <p class="text-center">&copy; 2023. All rights reserved.</p>
-    </footer>
-    <script src="assets/script.js"></script>
-  </body>
+  </div>
+  <footer>
+    <br>
+    <p class="text-center">&copy; 2023. All rights reserved.</p>
+  </footer>
+  <script src="assets/script.js"></script>
+</body>
+
 </html>
