@@ -43,9 +43,9 @@ const charList = {
 }
 
 const charListOpt = ['a','b','c','d','e']
-let charListChoice = '';
-let userInput = '';
-let userKey = '';
+let charListChoice = 'a';
+let userInput = 'yefajbjfabbsabsrbJBHB';
+let userKey = 'test';
 let iterationIndex = 0;
 const indexOfInput = [];
 const indexOfKey = [];
@@ -53,6 +53,8 @@ let indexCoded = [];
 let modedIndexCoded = [];
 let codedArray = [];
 let userOutput = '';
+let inputOk = true;
+let tempInput;
 
 function getCharListChoice() {
   while (!charListOpt.includes(charListChoice)) {
@@ -64,24 +66,23 @@ function getCharListChoice() {
   return charListChoice;
 }
 
-function getUserInput() {
-  let passLenOpt = 0;
+function getInput(inputType) {
   // Keep asking for a password length until user chooses a number between 10 and 64 inclusive
   do {
-    userInput = prompt(`Enter the message you would like to pass through the cipher. All keyboard characters are accepted except a backslash ( \\ ) and double quotation marks (\").`);
-    // Convert user input to integer
-    inputLenOpt = parseInt(userInput);
-    // Error message if input was not an integer
-    if (isNaN(passLenOpt)) {
-        alert('Invalid input. Please enter a number.');
+    inputType = prompt(`Enter the message you would like to pass through the cipher. All keyboard characters are accepted except a backslash \\ and double quotation marks \" .`,tempInput);
+    tempInput = inputType;
+    if (inputType.length < 10 || inputType.length > 1000) {
+      alert('Your message must be at least 10 characters, and less than 1000 characters long.');
     }
-  } while(passLenOpt < 10 || passLenOpt > 64 || isNaN(passLenOpt))
-  return userInput;
-}
-
-function getUserKey() {
-
-  return userKey;
+    for(i = 0; i < inputType.length; i++) {
+      if (!charList[charListChoice].includes(inputType[i])) {
+        alert(`This character ${inputType[i]} is not allowed. Please remove it from your message.`);
+        inputOk = false;
+      }
+      else inputOk = true;
+    }
+  } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
+  return inputType;
 }
 
 function getIterationIndex() {
@@ -96,15 +97,10 @@ function getIndexOf(indexOpt, input, charListChoice) {
   return indexOpt;
 }
 
-function encryptToCoded(indexOfInput,indexOfKey) {
+function toCoded(indexOfInput,indexOfKey,encrypt) {
+  const operator = (encrypt) ? 1 : -1;
   indexCoded = indexOfInput.map((value, index) => 
-    value + indexOfKey[index % indexOfKey.length]);
-  return indexCoded;
-}
-
-function decryptToCoded(indexOfInput,indexOfKey) {
-  indexCoded = indexOfInput.map((value, index) => 
-    value - indexOfKey[index % indexOfKey.length]);
+    value + operator * (indexOfKey[index % indexOfKey.length]));
   return indexCoded;
 }
 
