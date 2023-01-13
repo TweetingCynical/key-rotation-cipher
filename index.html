@@ -26,12 +26,12 @@
             <option value="b">Set B</option>
             <option value="c">Set C</option>
             <option value="d">Set D</option>
-            <option value="d">Set E</option>
+            <option value="e">Set E</option>
           </select>
         </div>
         <div class="userDropdowns">
           <p>How many iterations you would like to run?</p>
-          <select name="charListChoice" id="iterationIndex">
+          <select name="iterationIndex" id="iterationIndex">
             <option value="0">0 (default)</option>
             <option value="1">1 iteration</option>
             <option value="2">2 iterations</option>
@@ -46,7 +46,7 @@
         </div>
         <div class="userDropdowns">
           <p>Do you want to encrypt or decrypt your message:</p>
-          <select name="charListChoice" id="encrypt">
+          <select name="encrypt" id="encrypt">
             <option value="true">Encrypt</option>
             <option value="false">Decrypt</option>
           </select>
@@ -57,12 +57,16 @@
           <h4>Message Content</h4>
           <p>Type your message here. Almost all keyboard characters are accepted:</p>
           <textarea id="userInput" placeholder="Type your message here..." aria-label="Input for Cipher"></textarea>
+          <p id="userInputErrorL"></p>
+          <p id="userInputErrorC"></p>
         </div>
         <div>
           <h4>Private Key</h4>
           <p>Choose your own encryption key. This will be used to decrypt the message. Almost all keyboard characters
             are accepted:</p>
           <textarea id="userKey" placeholder="Type your complex key here..." aria-label="Key for Cipher"></textarea>
+          <p id="userKeyErrorL"></p>
+          <p id="userKeyErrorC"></p>
         </div>
         <textarea readonly id="cipher-output" placeholder="Your output will appear here..."
           aria-label="Generated Cipher"></textarea>

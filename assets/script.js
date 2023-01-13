@@ -47,6 +47,10 @@ let charListChoiceS = document.querySelector('#charListChoice');
 let userInputS = document.querySelector('#userInput');
 let userKeyS = document.querySelector('#userKey');
 let iterationIndexS = document.querySelector('#iterationIndex');
+let userInputErrorC = document.querySelector('#userInputErrorC');
+let userKeyErrorC = document.querySelector('#userKeyErrorC');
+let userInputErrorL = document.querySelector('#userInputErrorL');
+let userKeyErrorL = document.querySelector('#userKeyErrorL');
 let charListChoice = charListChoiceS.value;
 let userInput = userInputS.value;
 let userKey = userKeyS.value;
@@ -67,7 +71,13 @@ function getCharListChoice() {
 
 function getInputs(inputType) {
   do {
-
+    for(i = 0; i < inputType.length; i++) {
+      if (!charList[charListChoice].includes(inputType[i])) {
+        document.querySelector("#" + inputType + "ErrorC").innerText = `This character ${inputType[i]} is not allowed. Please remove it from your message.`;
+        inputOk = false;
+      }
+      else inputOk = true;
+    }
   } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
   return inputType;
 }
