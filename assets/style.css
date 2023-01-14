@@ -55,11 +55,12 @@ header, footer {
 
 .userOptions {
   display: flex;
-  justify-items: center;
+  border: 1px solid var(--mainColor);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px var(--mainColor);
 }
 
 .userDropdowns {
-  justify-content: center;
   width: 100%;
   margin: 5px;
   padding: 5px;
@@ -93,6 +94,15 @@ header, footer {
 
 .card-body {
   min-height: 100px;
+}
+
+#iterationIndex, #encryption, #charListChoice {
+  width: 90%;
+  margin: 5px;
+  padding: 3px;
+  color: white;
+  background: var(--secondaryColor);
+  border-radius: 2px;
 }
 
 .errorAlert {

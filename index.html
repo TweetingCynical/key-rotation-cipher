@@ -19,6 +19,7 @@
       <!-- <legend>Our encryption uses a randomised character set. First, choose which one you would to use.</legend> -->
       <h2>Cipher Options</h2>
       <section class="userOptions">
+        <article class="optionCards">
         <div class="userDropdowns">
           <p>Which randomised character set you would like to use?</p>
           <select name="charListChoice" id="charListChoice">
@@ -29,6 +30,8 @@
             <option value="e">Set E</option>
           </select>
         </div>
+      </article>
+      <article class="optionCards">
         <div class="userDropdowns">
           <p>How many iterations you would like to run?</p>
           <select name="iterationIndex" id="iterationIndex">
@@ -42,6 +45,8 @@
             <option value=8>8 iterations</option>
           </select>
         </div>
+      </article>
+      <article class="optionCards">
         <div class="userDropdowns">
           <p>Do you want to encrypt or decrypt your message:</p>
           <select name="encryption" id="encryption">
@@ -49,6 +54,7 @@
             <option value="decrypt">Decrypt</option>
           </select>
         </div>
+      </article>
       </section>
       <div class="card-body">
         <div>
