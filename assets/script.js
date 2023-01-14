@@ -42,21 +42,6 @@ const charList = {
     '§','e','?','G','€','#','$','Z','±','b','S']
 }
 
-const charListOpt = ['a','b','c','d','e']
-let charListChoiceS = document.querySelector('#charListChoice');
-let encryptS = document.querySelector('#encryption');
-let userInputS = document.querySelector('#userInput');
-let userKeyS = document.querySelector('#userKey');
-// let iterationIndexS = document.querySelector('#iterationIndex');
-// let userInputErrorC = document.querySelector('#userInputErrorC');
-// let userKeyErrorC = document.querySelector('#userKeyErrorC');
-// let userInputErrorL = document.querySelector('#userInputErrorL');
-// let userKeyErrorL = document.querySelector('#userKeyErrorL');
-let charListChoice = charListChoiceS.value;
-let encrypt = encryptS.value;
-let userInput = userInputS.value;
-let userKey = userKeyS.value;
-// let iterationIndex = iterationIndexS.value;
 const indexOfInput = [];
 const indexOfKey = [];
 let indexCoded = [];
@@ -64,35 +49,10 @@ let modedIndexCoded = [];
 let codedArray = [];
 let userOutput = '';
 
-// Gets user's character set choice
-function getCharListChoice() {
-  charListChoice = charListChoiceS.value;
-  return charListChoice;
+// Get's user options from html elements
+function getOptions(selector) {
+  return document.querySelector(selector).value;
 }
-
-// Gets user's choice of encryption or decryption
-function getEncryption() {
-  encrypt = encryptS.value;
-  return encrypt;
-}
-
-// Gets user's message string
-function getUserInput() {
-  userInput = userInputS.value;
-  return userInput;
-}
-
-// Gets user's Key string
-function getUserKey() {
-  userKey = userKeyS.value;
-  return userKey;
-}
-
-// Gets the number of iterations the user wants to perform on their message
-// function getIterationIndex() {
-//   iterationIndex = iterationIndexS.value;
-//   return iterationIndex;
-// }
 
 // For each character in the string (from userInput or userKey)
 // get the index of that same character, from the character set chosen
@@ -154,15 +114,11 @@ function updateUser() {
 
 // Full run sequence
 function run() {
-  getCharListChoice();
-  console.log(charListChoice)
-  getEncryption();
-  console.log(encrypt)
-  getUserInput();
-  console.log(userInput)
-  getUserKey();
-  console.log(userKey)
-  // getIterationIndex();
+  const charListChoice = getOptions('#charListChoice');
+  const encrypt = getOptions('#encryption');
+  const userInput = getOptions('#userInput');
+  const userKey = getOptions('#userKey');
+  const iterationIndex = getOptions('#iterationIndex');
   getIndexOf(indexOfInput,userInput,charListChoice);
   console.log(indexOfInput)
   getIndexOf(indexOfKey,userKey,charListChoice);
