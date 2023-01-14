@@ -44,67 +44,50 @@ const charList = {
 
 const charListOpt = ['a','b','c','d','e']
 let charListChoiceS = document.querySelector('#charListChoice');
+let encryptS = document.querySelector('#encryption');
 let userInputS = document.querySelector('#userInput');
 let userKeyS = document.querySelector('#userKey');
-let iterationIndexS = document.querySelector('#iterationIndex');
-let userInputErrorC = document.querySelector('#userInputErrorC');
-let userKeyErrorC = document.querySelector('#userKeyErrorC');
-let userInputErrorL = document.querySelector('#userInputErrorL');
-let userKeyErrorL = document.querySelector('#userKeyErrorL');
+// let iterationIndexS = document.querySelector('#iterationIndex');
+// let userInputErrorC = document.querySelector('#userInputErrorC');
+// let userKeyErrorC = document.querySelector('#userKeyErrorC');
+// let userInputErrorL = document.querySelector('#userInputErrorL');
+// let userKeyErrorL = document.querySelector('#userKeyErrorL');
 let charListChoice = charListChoiceS.value;
+let encrypt = encryptS.value;
 let userInput = userInputS.value;
 let userKey = userKeyS.value;
-let iterationIndex = iterationIndexS.value;
+// let iterationIndex = iterationIndexS.value;
 const indexOfInput = [];
 const indexOfKey = [];
 let indexCoded = [];
 let modedIndexCoded = [];
 let codedArray = [];
 let userOutput = '';
-let inputOk = true;
-let tempInput;
 
 function getCharListChoice() {
   charListChoice = charListChoiceS.value;
   return charListChoice;
 }
 
-function getInputs(inputType) {
-  do {
-    for(i = 0; i < inputType.length; i++) {
-      if (!charList[charListChoice].includes(inputType[i])) {
-        document.querySelector("#" + inputType + "ErrorC").innerText = `This character ${inputType[i]} is not allowed. Please remove it from your message.`;
-        inputOk = false;
-      }
-      else inputOk = true;
-    }
-  } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
-  return inputType;
+function getEncryption() {
+  encrypt = encryptS.value;
+  return encrypt;
 }
 
-// function getInput(inputType) {
-//   // Keep asking for a password length until user chooses a number between 10 and 64 inclusive
-//   do {
-//     inputType = prompt(`Enter the message you would like to pass through the cipher. All keyboard characters are accepted except a backslash \\ and double quotation marks \" .`,tempInput);
-//     tempInput = inputType;
-//     if (inputType.length < 10 || inputType.length > 1000) {
-//       alert('Your message must be at least 10 characters, and less than 1000 characters long.');
-//     }
-//     for(i = 0; i < inputType.length; i++) {
-//       if (!charList[charListChoice].includes(inputType[i])) {
-//         alert(`This character ${inputType[i]} is not allowed. Please remove it from your message.`);
-//         inputOk = false;
-//       }
-//       else inputOk = true;
-//     }
-//   } while(inputType.length < 10 || inputType.length > 1000 || inputOk === false)
-//   return inputType;
+function getUserInput() {
+  userInput = userInputS.value;
+  return userInput;
+}
+
+function getUserKey() {
+  userKey = userKeyS.value;
+  return userKey;
+}
+
+// function getIterationIndex() {
+//   iterationIndex = iterationIndexS.value;
+//   return iterationIndex;
 // }
-
-function getIterationIndex() {
-  iterationIndex = iterationIndexS.value;
-  return iterationIndex;
-}
 
 function getIndexOf(indexOpt, input, charListChoice) {
   for(i = 0; i < input.length; i++) {
@@ -114,9 +97,9 @@ function getIndexOf(indexOpt, input, charListChoice) {
 }
 
 function toCoded(indexOfInput,indexOfKey,encrypt) {
-  const operator = (encrypt) ? 1 : -1;
-  indexCoded = indexOfInput.map((value, index) => 
-    value + operator * (indexOfKey[index % indexOfKey.length]));
+  const operator = (encrypt === "encrypt") ? 1:-1;
+  indexCoded = indexOfInput.map((value, index) =>
+    value + (operator * (indexOfKey[index % indexOfKey.length])));
   return indexCoded;
 }
 
@@ -136,7 +119,49 @@ function convertArray(codedArray) {
   return userOutput;
 }
 
-function run() {
-
+function reset() {
+  indexOfInput.length = 0;
+  indexOfKey.length = 0;
+  indexCoded.length = 0;
+  modedIndexCoded.length = 0;
+  codedArray.length = 0;
+  userOutput = '';
 }
 
+// THIS IS WHERE THE CODE BEGINS TO RUN
+// Get references to the #cipher element
+const cipherBtn = document.querySelector('#cipher');
+
+function updateUser() {
+  let messageText = document.querySelector('#cipher-output');
+  messageText.value = userOutput;
+}
+
+function run() {
+  getCharListChoice();
+  console.log(charListChoice)
+  getEncryption();
+  console.log(encrypt)
+  getUserInput();
+  console.log(userInput)
+  getUserKey();
+  console.log(userKey)
+  // getIterationIndex();
+  getIndexOf(indexOfInput,userInput,charListChoice);
+  console.log(indexOfInput)
+  getIndexOf(indexOfKey,userKey,charListChoice);
+  console.log(indexOfKey)
+  toCoded(indexOfInput,indexOfKey,encrypt);
+  console.log(indexCoded)
+  modIndexCoded(indexCoded,charListChoice);
+  console.log(modedIndexCoded)
+  convertCoded(modedIndexCoded,charListChoice);
+  console.log(codedArray)
+  convertArray(codedArray);
+  console.log(userOutput)
+  updateUser();
+  reset();
+}
+
+// Add event listener to generate button
+cipherBtn.addEventListener('click', run);
