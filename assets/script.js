@@ -60,7 +60,7 @@ function getIndexOf(indexOpt, input, charListChoice) {
   for(i = 0; i < input.length; i++) {
     indexOpt.push(charList[charListChoice].indexOf(input[i]));
   }
-  return indexOpt;
+  return;
 }
 
 // Caesar cipher on each userInput character, shifting by each userKey character
@@ -69,21 +69,21 @@ function toCoded(indexOfInput,indexOfKey,encrypt) {
   const operator = (encrypt === "encrypt") ? 1:-1;
   indexCoded = indexOfInput.map((value, index) =>
     value + (operator * (indexOfKey[index % indexOfKey.length])));
-  return indexCoded;
+  return;
 }
 
 // Modify the result of toCoded to account for any negative numbers which should restart at the beginning of the charList check 
 function modIndexCoded(indexCoded,charListChoice) {
   modedIndexCoded = indexCoded.map((value) =>
     value < 0 ? (value + charList[charListChoice].length) % charList[charListChoice].length : value % charList[charListChoice].length);
-    return modedIndexCoded;
+    return;
 }
 
 // Use the value of each element in modedIndexCoded as the index reference in charList
 // return the corresponding character value
 function convertCoded(modedIndexCoded, charListChoice) {
   codedArray = modedIndexCoded.map(index => charList[charListChoice][index]);
-  return codedArray;
+  return;
 }
 
 // Convert the array into a string to output to the document
@@ -99,7 +99,6 @@ function reset() {
   indexCoded.length = 0;
   modedIndexCoded.length = 0;
   codedArray.length = 0;
-  userOutput = '';
 }
 
 // THIS IS WHERE THE CODE BEGINS TO RUN
@@ -109,30 +108,36 @@ const cipherBtn = document.querySelector('#cipher');
 // Pass userOutput to the cipher-output in the document
 function updateUser() {
   let messageText = document.querySelector('#cipher-output');
-  messageText.value = userOutput;
+  messageText.value = finalResult;
+}
+
+// Iterate through encryption process using the same key, feeding the userOutput after each pass back into function
+function iteration(charListChoice, encrypt, userInput, userKey, iterationIndex) {
+  for (iterate = 0; iterate < iterationIndex; iterate++) {
+    getIndexOf(indexOfInput,userInput,charListChoice);
+    getIndexOf(indexOfKey,userKey,charListChoice);
+    toCoded(indexOfInput,indexOfKey,encrypt);
+    modIndexCoded(indexCoded,charListChoice);
+    convertCoded(modedIndexCoded,charListChoice);
+    convertArray(codedArray);
+    userInput = userOutput;
+    console.log(iterationIndex);
+    reset();
+    finalResult = userOutput;
+    userOutput = '';
+  }
+  return finalResult;
 }
 
 // Full run sequence
 function run() {
   const charListChoice = getOptions('#charListChoice');
   const encrypt = getOptions('#encryption');
-  const userInput = getOptions('#userInput');
+  let userInput = getOptions('#userInput');
   const userKey = getOptions('#userKey');
   const iterationIndex = getOptions('#iterationIndex');
-  getIndexOf(indexOfInput,userInput,charListChoice);
-  console.log(indexOfInput)
-  getIndexOf(indexOfKey,userKey,charListChoice);
-  console.log(indexOfKey)
-  toCoded(indexOfInput,indexOfKey,encrypt);
-  console.log(indexCoded)
-  modIndexCoded(indexCoded,charListChoice);
-  console.log(modedIndexCoded)
-  convertCoded(modedIndexCoded,charListChoice);
-  console.log(codedArray)
-  convertArray(codedArray);
-  console.log(userOutput)
-  updateUser();
-  reset();
+  iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
+  updateUser(finalResult);
 }
 
 // Add event listener to generate button
