@@ -54,6 +54,30 @@ function getOptions(selector) {
   return document.querySelector(selector).value;
 }
 
+function errorCheck(userInput, userKey) {
+  inputLen = checkLen(userInput);
+  errMsg(inputLen)
+  let inputErrTxt = document.querySelector('#userInputError')
+  inputErrTxt.innerText = errorMessage;
+  keyLen = checkLen(userKey);
+  errMsg(keyLen)
+  let keyErrTxt = document.querySelector('#userKeyError')
+  keyErrTxt.innerText = errorMessage;
+}
+
+function checkLen(chkInput) {
+  return chkInput.length
+}  
+
+function errMsg(elem) {
+  if (elem < 10) {
+    errorMessage = "Must be at least 10 characters."
+  } else {
+    errorMessage = '';
+  }
+  return errorMessage;
+}
+
 // For each character in the string (from userInput or userKey)
 // get the index of that same character, from the character set chosen
 function getIndexOf(indexOpt, input, charListChoice) {
@@ -121,7 +145,6 @@ function iteration(charListChoice, encrypt, userInput, userKey, iterationIndex) 
     convertCoded(modedIndexCoded,charListChoice);
     convertArray(codedArray);
     userInput = userOutput;
-    console.log(iterationIndex);
     reset();
     finalResult = userOutput;
     userOutput = '';
@@ -135,6 +158,7 @@ function run() {
   const encrypt = getOptions('#encryption');
   let userInput = getOptions('#userInput');
   const userKey = getOptions('#userKey');
+  errorCheck(userInput, userKey);
   const iterationIndex = getOptions('#iterationIndex');
   iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
   updateUser(finalResult);
