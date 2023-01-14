@@ -64,31 +64,38 @@ let modedIndexCoded = [];
 let codedArray = [];
 let userOutput = '';
 
+// Gets user's character set choice
 function getCharListChoice() {
   charListChoice = charListChoiceS.value;
   return charListChoice;
 }
 
+// Gets user's choice of encryption or decryption
 function getEncryption() {
   encrypt = encryptS.value;
   return encrypt;
 }
 
+// Gets user's message string
 function getUserInput() {
   userInput = userInputS.value;
   return userInput;
 }
 
+// Gets user's Key string
 function getUserKey() {
   userKey = userKeyS.value;
   return userKey;
 }
 
+// Gets the number of iterations the user wants to perform on their message
 // function getIterationIndex() {
 //   iterationIndex = iterationIndexS.value;
 //   return iterationIndex;
 // }
 
+// For each character in the string (from userInput or userKey)
+// get the index of that same character, from the character set chosen
 function getIndexOf(indexOpt, input, charListChoice) {
   for(i = 0; i < input.length; i++) {
     indexOpt.push(charList[charListChoice].indexOf(input[i]));
@@ -96,6 +103,8 @@ function getIndexOf(indexOpt, input, charListChoice) {
   return indexOpt;
 }
 
+// Caesar cipher on each userInput character, shifting by each userKey character
+// resulting in a rotating shift cipher
 function toCoded(indexOfInput,indexOfKey,encrypt) {
   const operator = (encrypt === "encrypt") ? 1:-1;
   indexCoded = indexOfInput.map((value, index) =>
@@ -103,22 +112,27 @@ function toCoded(indexOfInput,indexOfKey,encrypt) {
   return indexCoded;
 }
 
+// Modify the result of toCoded to account for any negative numbers which should restart at the beginning of the charList check 
 function modIndexCoded(indexCoded,charListChoice) {
   modedIndexCoded = indexCoded.map((value) =>
     value < 0 ? (value + charList[charListChoice].length) % charList[charListChoice].length : value % charList[charListChoice].length);
     return modedIndexCoded;
 }
 
+// Use the value of each element in modedIndexCoded as the index reference in charList
+// return the corresponding character value
 function convertCoded(modedIndexCoded, charListChoice) {
   codedArray = modedIndexCoded.map(index => charList[charListChoice][index]);
   return codedArray;
 }
 
+// Convert the array into a string to output to the document
 function convertArray(codedArray) {
   userOutput = codedArray.join('');
   return userOutput;
 }
 
+// Reset created arrays to a length of zero to allow for re running the cipher
 function reset() {
   indexOfInput.length = 0;
   indexOfKey.length = 0;
@@ -132,11 +146,13 @@ function reset() {
 // Get references to the #cipher element
 const cipherBtn = document.querySelector('#cipher');
 
+// Pass userOutput to the cipher-output in the document
 function updateUser() {
   let messageText = document.querySelector('#cipher-output');
   messageText.value = userOutput;
 }
 
+// Full run sequence
 function run() {
   getCharListChoice();
   console.log(charListChoice)
