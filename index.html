@@ -57,7 +57,7 @@
       </section>
       <div class="card-body">
         <div>
-          <h4>Message Content</h4>
+          <h4>Message Content (max length 1000 characters)</h4>
           <p>Type your message here. Almost all keyboard characters are accepted:</p>
           <textarea
             id="userInput"
@@ -69,7 +69,7 @@
           <p class="errorAlert" id="userInputError"></p>
         </div>
         <div>
-          <h4>Private Key</h4>
+          <h4>Private Key (max length 64 characters)</h4>
           <p>Choose your own encryption key. This will be used to decrypt the message. Almost all keyboard characters
             are accepted:</p>
           <input 
@@ -79,8 +79,8 @@
             wrap="off"
             placeholder="Type your complex key here..." 
             aria-label="Key for Cipher"></input>
-            <i class="fa-regular fa-eye" id="showPass"></i>
-            <i class="fa-regular fa-eye-slash" id="hidePass"></i>
+            <i class="fa-regular fa-eye" id="hidePass"></i>
+            <i class="fa-regular fa-eye-slash" id="showPass"></i>
           <p class="errorAlert errorAlertKey" id="userKeyError"></p>
         </div>
         <textarea 

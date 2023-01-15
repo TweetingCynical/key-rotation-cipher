@@ -76,12 +76,12 @@ header, footer {
 
 .fa-eye {
   position: absolute;
-  visibility: visible;
+  visibility: hidden;
   cursor: pointer;
 }
 
 .fa-eye-slash {
-  visibility: hidden;
+  visibility: visible;
   cursor: pointer;
 }
 

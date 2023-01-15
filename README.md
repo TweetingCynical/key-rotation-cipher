@@ -59,6 +59,7 @@ Steps to achieving the working generator:
 
 ## Suggested future changes
 
+- Add show/hide private key option button;
 
 
 ## Screenshot
@@ -68,4 +69,4 @@ Working version of site should look like this at standard screen size:
 
 ## License
 
-Copyright (c) 2023
+Copyright (c) 2023. All rights reserved.

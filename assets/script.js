@@ -107,7 +107,7 @@ function reset() {
 }
 
 // Check for errors in the userInput or userKey
-function errMsg(inputType, selector, charListChoice) {
+function displayErrMsg(inputType, selector, charListChoice) {
   // Check length is at least 10 characters
   const chkLen = inputType.length;
   let charLenErr = "";
@@ -141,13 +141,13 @@ function errMsg(inputType, selector, charListChoice) {
   }
 }
 
-function showPassX() {
+function displayShowPass() {
   showPass.style.visibility = "hidden";
   hidePass.style.visibility = "visible";
   document.querySelector("#userKey").type = "text";
 }
 
-function hidePassX() {
+function displayHidePass() {
   showPass.style.visibility = "visible";
   hidePass.style.visibility = "hidden";
   document.querySelector("#userKey").type = "password";
@@ -197,8 +197,8 @@ function run() {
   const iterationIndex = getOptions("#iterationIndex");
   const userInput = getOptions("#userInput");
   const userKey = getOptions("#userKey");
-  const inputError = errMsg(userInput, "#userInputError", charListChoice);
-  const keyError = errMsg(userKey, "#userKeyError", charListChoice);
+  const inputError = displayErrMsg(userInput, "#userInputError", charListChoice);
+  const keyError = displayErrMsg(userKey, "#userKeyError", charListChoice);
   // If there are no errors, complete cipher
   if (!inputError && !keyError) {
     iteration(charListChoice, encrypt, userInput, userKey, iterationIndex);
@@ -210,5 +210,5 @@ function run() {
 
 // Add event listener to buttons
 cipherBtn.addEventListener("click", run);
-showPass.addEventListener("click", showPassX);
-hidePass.addEventListener("click", hidePassX);
+showPass.addEventListener("click", displayShowPass);
+hidePass.addEventListener("click", displayHidePass);
