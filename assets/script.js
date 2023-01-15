@@ -116,7 +116,6 @@ function errMsg(inputType, selector, charListChoice) {
   for(char = 0; char < chkLen; char++) {
     if (!charList[charListChoice].includes(inputType[char])) {
       charErrArr.push(inputType[char])
-      console.log(charErrArr)
     }
   }
   
@@ -124,7 +123,6 @@ function errMsg(inputType, selector, charListChoice) {
   let charErrStr = '';
   if (charErrArr.length > 0) {
     charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
-    console.log(charErrStr)
   }
   else {
     charErrStr = '';
@@ -136,7 +134,7 @@ function errMsg(inputType, selector, charListChoice) {
   inputErrTxt.innerText = errorMessageContent;
 
   // Return true if errorMessageContent has content
-  if (errorMessageContent.length > 2) {
+  if (errorMessageContent.length > 1) {
     return true;
   }
   else {
@@ -177,10 +175,11 @@ function run() {
   const charListChoice = getOptions('#charListChoice');
   const encrypt = getOptions('#encryption');
   const iterationIndex = getOptions('#iterationIndex');
-  let userInput = getOptions('#userInput');
+  const userInput = getOptions('#userInput');
   const userKey = getOptions('#userKey');
-  let inputError = errMsg(userInput, '#userInputError', charListChoice);
-  let keyError = errMsg(userKey, '#userKeyError', charListChoice);
+  const inputError = errMsg(userInput, '#userInputError', charListChoice);
+  const keyError = errMsg(userKey, '#userKeyError', charListChoice);
+  // If there are no errors, complete cipher
   if (!inputError && !keyError) {
     iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
     updateUser(finalResult);
