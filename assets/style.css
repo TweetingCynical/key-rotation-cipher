@@ -228,10 +228,17 @@ button[disabled] {
   #cipher-output {
     font-size: 1rem;
   }
+
+  #userKey {
+    width: 90%;
+  }
 }
 
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+  }
+  #userKey {
+    width: 85%;
   }
 }
