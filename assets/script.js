@@ -57,8 +57,8 @@ function getOptions(selector) {
 // For each character in the string (from userInput or userKey)
 // get the index of that same character, from the character set chosen
 function getIndexOf(indexOpt, input, charListChoice) {
-  for (i = 0; i < input.length; i++) {
-    indexOpt.push(charList[charListChoice].indexOf(input[i]));
+  for (let char = 0; char < input.length; char++) {
+    indexOpt.push(charList[charListChoice].indexOf(input[char]));
   }
   return;
 }
@@ -117,7 +117,7 @@ function errMsg(inputType, selector, charListChoice) {
 
   // Create array of all characters that are used but not allowed
   let charErrArr = [];
-  for (char = 0; char < chkLen; char++) {
+  for (let char = 0; char < chkLen; char++) {
     if (!charList[charListChoice].includes(inputType[char])) {
       charErrArr.push(inputType[char]);
     }
@@ -175,7 +175,7 @@ function iteration(
   userKey,
   iterationIndex
 ) {
-  for (iterate = 0; iterate < iterationIndex; iterate++) {
+  for (let iterationCount = 0; iterationCount < iterationIndex; iterationCount++) {
     getIndexOf(indexOfInput, userInput, charListChoice);
     getIndexOf(indexOfKey, userKey, charListChoice);
     toCoded(indexOfInput, indexOfKey, encrypt);
