@@ -40,14 +40,14 @@ p {
 }
 
 .wrapper {
-  padding-top: 30px;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
 header, footer {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   padding-top: 0px;
   color: white;
   background-color: var(--mainColor);
@@ -70,6 +70,7 @@ header, footer {
   width: 100%;
   border: 2px solid var(--secondaryColor);
   border-radius: 2px;
+  resize: none;
 }
 
 .card {
@@ -81,7 +82,7 @@ header, footer {
   font-size: 18px;
   margin: 0 auto;
   max-width: 800px;
-  padding: 30px 40px;
+  padding: 20px 20px;
 }
 
 .card-header::after {
@@ -168,8 +169,9 @@ button[disabled] {
   -moz-appearance: none;
   appearance: none;
   border: none;
-  display: block;
+  display: flex;
   width: 100%;
+  height: auto;
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
@@ -181,7 +183,7 @@ button[disabled] {
   border: 2px dashed #c0c7cf;
   border-radius: 6px;
   resize: none;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* Media queries for adjusting to smaller screen sizes */
@@ -189,6 +191,10 @@ button[disabled] {
   .checkboxes {
     flex-direction: column;
     margin: 0 auto;
+  }
+
+  .userOptions {
+    flex-direction: column;
   }
 
   .btn {
