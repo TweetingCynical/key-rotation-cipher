@@ -47,7 +47,7 @@ const indexOfKey = [];
 let indexCoded = [];
 let modedIndexCoded = [];
 let codedArray = [];
-let userOutput = '';
+let userOutput = "";
 
 // Get's user options from html elements
 function getOptions(selector) {
@@ -57,7 +57,7 @@ function getOptions(selector) {
 // For each character in the string (from userInput or userKey)
 // get the index of that same character, from the character set chosen
 function getIndexOf(indexOpt, input, charListChoice) {
-  for(i = 0; i < input.length; i++) {
+  for (i = 0; i < input.length; i++) {
     indexOpt.push(charList[charListChoice].indexOf(input[i]));
   }
   return;
@@ -65,30 +65,35 @@ function getIndexOf(indexOpt, input, charListChoice) {
 
 // Caesar cipher on each userInput character, shifting by each userKey character
 // resulting in a rotating shift cipher
-function toCoded(indexOfInput,indexOfKey,encrypt) {
-  const operator = (encrypt === "encrypt") ? 1:-1;
-  indexCoded = indexOfInput.map((value, index) =>
-    value + (operator * (indexOfKey[index % indexOfKey.length])));
+function toCoded(indexOfInput, indexOfKey, encrypt) {
+  const operator = encrypt === "encrypt" ? 1 : -1;
+  indexCoded = indexOfInput.map(
+    (value, index) => value + operator * indexOfKey[index % indexOfKey.length]
+  );
   return;
 }
 
-// Modify the result of toCoded to account for any negative numbers which should restart at the beginning of the charList check 
-function modIndexCoded(indexCoded,charListChoice) {
+// Modify the result of toCoded to account for any negative numbers which should restart at the beginning of the charList check
+function modIndexCoded(indexCoded, charListChoice) {
   modedIndexCoded = indexCoded.map((value) =>
-    value < 0 ? (value + charList[charListChoice].length) % charList[charListChoice].length : value % charList[charListChoice].length);
-    return;
+    value < 0
+      ? (value + charList[charListChoice].length) %
+        charList[charListChoice].length
+      : value % charList[charListChoice].length
+  );
+  return;
 }
 
 // Use the value of each element in modedIndexCoded as the index reference in charList
 // return the corresponding character value
 function convertCoded(modedIndexCoded, charListChoice) {
-  codedArray = modedIndexCoded.map(index => charList[charListChoice][index]);
+  codedArray = modedIndexCoded.map((index) => charList[charListChoice][index]);
   return;
 }
 
 // Convert the array into a string to output to the document
 function convertArray(codedArray) {
-  userOutput = codedArray.join('');
+  userOutput = codedArray.join("");
   return userOutput;
 }
 
@@ -105,27 +110,28 @@ function reset() {
 function errMsg(inputType, selector, charListChoice) {
   // Check length is at least 10 characters
   const chkLen = inputType.length;
-  let charLenErr = '';
+  let charLenErr = "";
   if (chkLen < 10) {
-    charLenErr = "Must be at least 10 characters."
+    charLenErr = "Must be at least 10 characters.";
   }
 
   // Create array of all characters that are used but not allowed
   let charErrArr = [];
-  for(char = 0; char < chkLen; char++) {
+  for (char = 0; char < chkLen; char++) {
     if (!charList[charListChoice].includes(inputType[char])) {
-      charErrArr.push(inputType[char])
+      charErrArr.push(inputType[char]);
     }
   }
-  
+
   // Check if array created above has any content
-  let charErrStr = '';
+  let charErrStr = "";
   if (charErrArr.length > 0) {
-    charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
+    charErrStr =
+      "The following characters are not allowed: " + charErrArr.join(" ");
   }
 
   // Link to HTML element for displaying message
-  let inputErrTxt = document.querySelector(selector)
+  let inputErrTxt = document.querySelector(selector);
   let errorMessageContent = charLenErr + " " + charErrStr;
   inputErrTxt.innerText = errorMessageContent;
 
@@ -137,50 +143,55 @@ function errMsg(inputType, selector, charListChoice) {
 
 // THIS IS WHERE THE CODE BEGINS TO RUN
 // Get references to the #cipher element
-const cipherBtn = document.querySelector('#cipher');
+const cipherBtn = document.querySelector("#cipher");
 
 // Pass userOutput to the cipher-output in the document
 function updateUser() {
-  let messageText = document.querySelector('#cipher-output');
+  let messageText = document.querySelector("#cipher-output");
   messageText.value = finalResult;
 }
 
 // Actual process of creating output and updating user
 // Iterate through encryption process using the same key, feeding the userOutput after each pass back into function
-function iteration(charListChoice, encrypt, userInput, userKey, iterationIndex) {
+function iteration(
+  charListChoice,
+  encrypt,
+  userInput,
+  userKey,
+  iterationIndex
+) {
   for (iterate = 0; iterate < iterationIndex; iterate++) {
-    getIndexOf(indexOfInput,userInput,charListChoice);
-    getIndexOf(indexOfKey,userKey,charListChoice);
-    toCoded(indexOfInput,indexOfKey,encrypt);
-    modIndexCoded(indexCoded,charListChoice);
-    convertCoded(modedIndexCoded,charListChoice);
+    getIndexOf(indexOfInput, userInput, charListChoice);
+    getIndexOf(indexOfKey, userKey, charListChoice);
+    toCoded(indexOfInput, indexOfKey, encrypt);
+    modIndexCoded(indexCoded, charListChoice);
+    convertCoded(modedIndexCoded, charListChoice);
     convertArray(codedArray);
     userInput = userOutput;
     reset();
     finalResult = userOutput;
-    userOutput = '';
+    userOutput = "";
   }
   return finalResult;
 }
 
 // Full run sequence
 function run() {
-  const charListChoice = getOptions('#charListChoice');
-  const encrypt = getOptions('#encryption');
-  const iterationIndex = getOptions('#iterationIndex');
-  const userInput = getOptions('#userInput');
-  const userKey = getOptions('#userKey');
-  const inputError = errMsg(userInput, '#userInputError', charListChoice);
-  const keyError = errMsg(userKey, '#userKeyError', charListChoice);
+  const charListChoice = getOptions("#charListChoice");
+  const encrypt = getOptions("#encryption");
+  const iterationIndex = getOptions("#iterationIndex");
+  const userInput = getOptions("#userInput");
+  const userKey = getOptions("#userKey");
+  const inputError = errMsg(userInput, "#userInputError", charListChoice);
+  const keyError = errMsg(userKey, "#userKeyError", charListChoice);
   // If there are no errors, complete cipher
   if (!inputError && !keyError) {
-    iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
+    iteration(charListChoice, encrypt, userInput, userKey, iterationIndex);
     updateUser(finalResult);
-  }
-  else {
+  } else {
     return;
   }
 }
 
 // Add event listener to generate button
-cipherBtn.addEventListener('click', run);
+cipherBtn.addEventListener("click", run);
