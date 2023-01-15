@@ -54,49 +54,6 @@ function getOptions(selector) {
   return document.querySelector(selector).value;
 }
 
-// Check for errors in the userInput or userKey
-function errMsg(inputType, selector, charListChoice) {
-  // Check length is at least 10 characters
-  chkLen = inputType.length;
-  if (chkLen < 10) {
-    charLenErr = "Must be at least 10 characters."
-  } else {
-    charLenErr = '';
-  }
-
-  // Create array of all characters that are used but not allowed
-  let charErrArr = [];
-  for(char = 0; char < chkLen; char++) {
-    if (!charList[charListChoice].includes(inputType[char])) {
-      charErrArr.push(inputType[char])
-      console.log(charErrArr)
-    }
-  }
-  
-  // Check if array created above has any content
-  let charErrStr = '';
-  if (charErrArr.length > 0) {
-    charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
-    console.log(charErrStr)
-  }
-  else {
-    charErrStr = '';
-  }
-
-  // Link to HTML element for displaying message
-  let inputErrTxt = document.querySelector(selector)
-  let errorMessageContent = charLenErr + " " + charErrStr;
-  inputErrTxt.innerText = errorMessageContent;
-
-  // Return true if errorMessageContent has content
-  if (errorMessageContent.length > 2) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
 // For each character in the string (from userInput or userKey)
 // get the index of that same character, from the character set chosen
 function getIndexOf(indexOpt, input, charListChoice) {
@@ -144,6 +101,49 @@ function reset() {
   codedArray.length = 0;
 }
 
+// Check for errors in the userInput or userKey
+function errMsg(inputType, selector, charListChoice) {
+  // Check length is at least 10 characters
+  chkLen = inputType.length;
+  if (chkLen < 10) {
+    charLenErr = "Must be at least 10 characters."
+  } else {
+    charLenErr = '';
+  }
+
+  // Create array of all characters that are used but not allowed
+  let charErrArr = [];
+  for(char = 0; char < chkLen; char++) {
+    if (!charList[charListChoice].includes(inputType[char])) {
+      charErrArr.push(inputType[char])
+      console.log(charErrArr)
+    }
+  }
+  
+  // Check if array created above has any content
+  let charErrStr = '';
+  if (charErrArr.length > 0) {
+    charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
+    console.log(charErrStr)
+  }
+  else {
+    charErrStr = '';
+  }
+
+  // Link to HTML element for displaying message
+  let inputErrTxt = document.querySelector(selector)
+  let errorMessageContent = charLenErr + " " + charErrStr;
+  inputErrTxt.innerText = errorMessageContent;
+
+  // Return true if errorMessageContent has content
+  if (errorMessageContent.length > 2) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 // THIS IS WHERE THE CODE BEGINS TO RUN
 // Get references to the #cipher element
 const cipherBtn = document.querySelector('#cipher');
@@ -154,6 +154,7 @@ function updateUser() {
   messageText.value = finalResult;
 }
 
+// Actual process of creating output and updating user
 // Iterate through encryption process using the same key, feeding the userOutput after each pass back into function
 function iteration(charListChoice, encrypt, userInput, userKey, iterationIndex) {
   for (iterate = 0; iterate < iterationIndex; iterate++) {
