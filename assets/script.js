@@ -54,28 +54,47 @@ function getOptions(selector) {
   return document.querySelector(selector).value;
 }
 
-function errorCheck(userInput, userKey) {
-  inputLen = checkLen(userInput);
-  errMsg(inputLen)
-  let inputErrTxt = document.querySelector('#userInputError')
-  inputErrTxt.innerText = errorMessage;
-  keyLen = checkLen(userKey);
-  errMsg(keyLen)
-  let keyErrTxt = document.querySelector('#userKeyError')
-  keyErrTxt.innerText = errorMessage;
-}
-
-function checkLen(chkInput) {
-  return chkInput.length
-}  
-
-function errMsg(elem) {
-  if (elem < 10) {
-    errorMessage = "Must be at least 10 characters."
+// Check for errors in the userInput or userKey
+function errMsg(inputType, selector, charListChoice) {
+  // Check length is at least 10 characters
+  chkLen = inputType.length;
+  if (chkLen < 10) {
+    charLenErr = "Must be at least 10 characters."
   } else {
-    errorMessage = '';
+    charLenErr = '';
   }
-  return errorMessage;
+
+  // Create array of all characters that are used but not allowed
+  let charErrArr = [];
+  for(char = 0; char < chkLen; char++) {
+    if (!charList[charListChoice].includes(inputType[char])) {
+      charErrArr.push(inputType[char])
+      console.log(charErrArr)
+    }
+  }
+  
+  // Check if array created above has any content
+  let charErrStr = '';
+  if (charErrArr.length > 0) {
+    charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
+    console.log(charErrStr)
+  }
+  else {
+    charErrStr = '';
+  }
+
+  // Link to HTML element for displaying message
+  let inputErrTxt = document.querySelector(selector)
+  let errorMessageContent = charLenErr + " " + charErrStr;
+  inputErrTxt.innerText = errorMessageContent;
+
+  // Return true if errorMessageContent has content
+  if (errorMessageContent.length > 2) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 // For each character in the string (from userInput or userKey)
@@ -156,12 +175,18 @@ function iteration(charListChoice, encrypt, userInput, userKey, iterationIndex) 
 function run() {
   const charListChoice = getOptions('#charListChoice');
   const encrypt = getOptions('#encryption');
+  const iterationIndex = getOptions('#iterationIndex');
   let userInput = getOptions('#userInput');
   const userKey = getOptions('#userKey');
-  errorCheck(userInput, userKey);
-  const iterationIndex = getOptions('#iterationIndex');
-  iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
-  updateUser(finalResult);
+  let inputError = errMsg(userInput, '#userInputError', charListChoice);
+  let keyError = errMsg(userKey, '#userKeyError', charListChoice);
+  if (!inputError && !keyError) {
+    iteration(charListChoice, encrypt, userInput, userKey, iterationIndex)
+    updateUser(finalResult);
+  }
+  else {
+    return;
+  }
 }
 
 // Add event listener to generate button
