@@ -104,11 +104,10 @@ function reset() {
 // Check for errors in the userInput or userKey
 function errMsg(inputType, selector, charListChoice) {
   // Check length is at least 10 characters
-  chkLen = inputType.length;
+  const chkLen = inputType.length;
+  let charLenErr = '';
   if (chkLen < 10) {
     charLenErr = "Must be at least 10 characters."
-  } else {
-    charLenErr = '';
   }
 
   // Create array of all characters that are used but not allowed
@@ -124,9 +123,6 @@ function errMsg(inputType, selector, charListChoice) {
   if (charErrArr.length > 0) {
     charErrStr = "The following characters are not allowed: " + charErrArr.join(' ');
   }
-  else {
-    charErrStr = '';
-  }
 
   // Link to HTML element for displaying message
   let inputErrTxt = document.querySelector(selector)
@@ -136,9 +132,6 @@ function errMsg(inputType, selector, charListChoice) {
   // Return true if errorMessageContent has content
   if (errorMessageContent.length > 1) {
     return true;
-  }
-  else {
-    return false;
   }
 }
 
