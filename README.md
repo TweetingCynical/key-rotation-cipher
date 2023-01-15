@@ -1,6 +1,6 @@
 # Key Rotation Cipher
 
-## A simple rotating Caeser cipher, interacting with the html elements, and collecting user inputs from a series of validated prompts
+## A rotating Vigenere cipher, interacting with the html elements, and collecting user inputs from a series of validated prompts
 
 ### Deployment / Code Repository
 
@@ -10,7 +10,7 @@
 
 ### Scope and Purpose
 
-
+Build an encryption tool that allows a user to input a message and a private key, and then run it through a rotating Caeser cipher / Vigenere cipher, and repeat the process n times, resulting in an output that cannot be as easily brute force decoded as a standard Caesar cipher. The Vigenere complexity will be further increased by using a choice of sets of randomised sequences of the initial character list.
 
 ### Installation
 
@@ -21,7 +21,7 @@ N/A
 Steps to achieving the working generator:
 
 * Declare variables;
-* Alerts, prompts and confirms to capture user choices:
+* HTML elements to capture:
   - charList choice (charListChoice);
   - user message (userInput);
   - user key (userKey);
@@ -29,7 +29,7 @@ Steps to achieving the working generator:
 * Validate capture options;
 * Get indexOf each character from charList. in user message;
 * Get indexOf each character from charList in user key;
-* Create loop to iterate through user message using caeser shift for each character using the following algorithm:
+* Create loop to iterate through user message using Vigenere shift for each character using the following algorithm:
 
   ```
   To encrypt:

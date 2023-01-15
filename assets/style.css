@@ -66,8 +66,26 @@ header, footer {
   padding: 5px;
 }
 
-#userInput, #userKey {
+#userInput {
   width: 100%;
+}
+
+#userKey {
+  width: 95%;
+}
+
+.fa-eye {
+  position: absolute;
+  visibility: visible;
+  cursor: pointer;
+}
+
+.fa-eye-slash {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#userInput, #userKey {
   border: 2px solid var(--secondaryColor);
   border-radius: 2px;
   resize: none;
@@ -111,6 +129,10 @@ header, footer {
   font-weight:bolder;
   font-size: 10px;
   margin: 0;
+}
+
+.errorAlertKey {
+  margin: 5px 0 0 0;
 }
 
 .card-footer {

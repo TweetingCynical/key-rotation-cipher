@@ -72,13 +72,16 @@
           <h4>Private Key</h4>
           <p>Choose your own encryption key. This will be used to decrypt the message. Almost all keyboard characters
             are accepted:</p>
-          <textarea 
+          <input 
+            type="password" 
             id="userKey"
             maxlength="64"
             wrap="off"
             placeholder="Type your complex key here..." 
-            aria-label="Key for Cipher"></textarea>
-          <p class="errorAlert" id="userKeyError"></p>
+            aria-label="Key for Cipher"></input>
+            <i class="fa-regular fa-eye" id="showPass"></i>
+            <i class="fa-regular fa-eye-slash" id="hidePass"></i>
+          <p class="errorAlert errorAlertKey" id="userKeyError"></p>
         </div>
         <textarea 
           readonly 
@@ -96,6 +99,8 @@
     <br>
     <p class="text-center">&copy; 2023. All rights reserved.</p>
   </footer>
+
+  <script src="https://kit.fontawesome.com/2abc7a20f2.js" crossorigin="anonymous"></script>
   <script src="assets/script.js"></script>
 </body>
 

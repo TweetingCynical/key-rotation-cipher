@@ -141,9 +141,24 @@ function errMsg(inputType, selector, charListChoice) {
   }
 }
 
+function showPassX() {
+  showPass.style.visibility = "hidden";
+  hidePass.style.visibility = "visible";
+  document.querySelector("#userKey").type = "text";
+}
+
+function hidePassX() {
+  showPass.style.visibility = "visible";
+  hidePass.style.visibility = "hidden";
+  document.querySelector("#userKey").type = "password";
+}
+
 // THIS IS WHERE THE CODE BEGINS TO RUN
-// Get references to the #cipher element
+// Get references to the button elements
 const cipherBtn = document.querySelector("#cipher");
+const showPass = document.querySelector("#showPass");
+const hidePass = document.querySelector("#hidePass")
+
 
 // Pass userOutput to the cipher-output in the document
 function updateUser() {
@@ -193,5 +208,7 @@ function run() {
   }
 }
 
-// Add event listener to generate button
+// Add event listener to buttons
 cipherBtn.addEventListener("click", run);
+showPass.addEventListener("click", showPassX);
+hidePass.addEventListener("click", hidePassX);
